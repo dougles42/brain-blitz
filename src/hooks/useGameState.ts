@@ -5,7 +5,7 @@ import {
   TOTAL_ROUNDS,
   NOTE_DURATION,
 } from "@/lib/game-constants";
-import { initAudio, playFrequency } from "@/lib/audio";
+import { initAudio, playFrequency, isAudioInitialized } from "@/lib/audio";
 import { scoreGuess, type ScoreResult } from "@/lib/scoring";
 
 function randomFreq(): number {
@@ -124,19 +124,25 @@ const initialState: GameState = {
 export function useGameState() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const startGame = useCallback(async () => {
-    await initAudio();
+  const startGame = useCallback(() => {
     dispatch({ type: "START_GAME" });
   }, []);
 
-  const playTargetNote = useCallback(() => {
+  const playTargetNote = useCallback(async () => {
     if (state.targetFreq === null) return;
+    try {
+      await initAudio();
+    } catch (err) {
+      console.error("Audio init failed:", err);
+      return;
+    }
     playFrequency(state.targetFreq, NOTE_DURATION);
     dispatch({ type: "NOTE_PLAYED" });
   }, [state.targetFreq]);
 
   const replayNote = useCallback(() => {
     if (state.targetFreq === null) return;
+    if (!isAudioInitialized()) return;
     playFrequency(state.targetFreq, NOTE_DURATION);
     dispatch({ type: "REPLAY_NOTE" });
   }, [state.targetFreq]);

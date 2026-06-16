@@ -21,7 +21,7 @@ export default function Game() {
   const { phase, round, targetFreq, sliderFreq, results, canReplay } = state;
 
   // ── Idle: Welcome / start screen ──────────────────────────────────
-  if (phase === "idle" && round === 1 && results.length === 0) {
+  if (phase === "idle" && targetFreq === null) {
     return (
       <div className="flex flex-col items-center justify-center gap-8 px-4 py-12 w-full max-w-lg mx-auto animate-in fade-in duration-300">
         <div className="text-center space-y-3">
