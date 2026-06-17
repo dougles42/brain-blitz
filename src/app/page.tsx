@@ -2,90 +2,64 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Brain Blitz — Free Browser Games",
+  title: "Brain Blitz",
   description:
-    "A collection of free browser games that test your brain. Pitch recognition, typography knowledge, geography, and more. No signup, no downloads.",
+    "Free browser games that test your brain. Pitch recognition, typography, geography, and more. No signup, no downloads.",
 };
 
 const games = [
-  {
-    slug: "pitch",
-    name: "Pitch Perfect",
-    emoji: "🎹",
-    description: "Hear a note. Recreate it from memory. How good is your musical ear?",
-    color: "violet",
-    available: true,
-  },
-  {
-    slug: "font",
-    name: "Font or Foe",
-    emoji: "🔤",
-    description: "See a letterform. Name the font. Are you a typography nerd?",
-    color: "amber",
-    available: false,
-  },
-  {
-    slug: "map",
-    name: "Map Blur",
-    emoji: "🗺️",
-    description: "A blurred country outline sharpens. Guess the country before time runs out.",
-    color: "emerald",
-    available: false,
-  },
-  {
-    slug: "words",
-    name: "Word Racer",
-    emoji: "⌨️",
-    description: "Type faster than your friends. Real-time typing battles.",
-    color: "blue",
-    available: false,
-  },
-  {
-    slug: "logo",
-    name: "Logo Legends",
-    emoji: "🏷️",
-    description: "Partial brand logos. Can you name them all?",
-    color: "rose",
-    available: false,
-  },
-  {
-    slug: "chord",
-    name: "Chord Crush",
-    emoji: "🎸",
-    description: "Hear a chord. Pick the right one. Test your harmonic ear.",
-    color: "orange",
-    available: false,
-  },
+  { slug: "pitch", name: "Pitch Perfect", desc: "Hear a note. Recreate it from memory.", emoji: "🎹", color: "#7c3aed", available: true },
+  { slug: "font", name: "Font or Foe", desc: "See a letterform. Name the font.", emoji: "🔤", color: "#f59e0b", available: false },
+  { slug: "map", name: "Map Blur", desc: "A blurred country. Guess before it sharpens.", emoji: "🗺️", color: "#10b981", available: false },
+  { slug: "words", name: "Word Racer", desc: "Type faster than your friends.", emoji: "⌨️", color: "#3b82f6", available: false },
+  { slug: "logo", name: "Logo Legends", desc: "Partial logos. Can you name them?", emoji: "🏷️", color: "#f43f5e", available: false },
+  { slug: "chord", name: "Chord Crush", desc: "Hear a chord. Pick the right one.", emoji: "🎸", color: "#f97316", available: false },
 ];
-
-const colorMap: Record<string, string> = {
-  violet: "border-violet-200 dark:border-violet-800 hover:border-violet-400 dark:hover:border-violet-600",
-  amber: "border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-600",
-  emerald: "border-emerald-200 dark:border-emerald-800 hover:border-emerald-400 dark:hover:border-emerald-600",
-  blue: "border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-600",
-  rose: "border-rose-200 dark:border-rose-800 hover:border-rose-400 dark:hover:border-rose-600",
-  orange: "border-orange-200 dark:border-orange-800 hover:border-orange-400 dark:hover:border-orange-600",
-};
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col flex-1">
+    <main className="relative flex-1 overflow-hidden">
+      {/* Ambient blobs */}
+      <div
+        className="blob w-[600px] h-[600px] -top-40 -left-40"
+        style={{ background: "rgba(124,58,237,0.12)" }}
+      />
+      <div
+        className="blob w-[500px] h-[500px] top-1/2 -right-40"
+        style={{ background: "rgba(59,130,246,0.08)" }}
+      />
+      <div
+        className="blob w-[400px] h-[400px] -bottom-40 left-1/3"
+        style={{ background: "rgba(6,182,212,0.06)" }}
+      />
+
       {/* Hero */}
-      <section className="relative flex flex-col items-center px-6 py-24 sm:py-32 text-center">
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
-          Brain Blitz
+      <section className="relative z-10 flex flex-col items-center pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.02] mb-8 animate-fade-in">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <span className="text-[11px] font-medium text-white/40 uppercase tracking-wider">
+            1 game live · 5 coming soon
+          </span>
+        </div>
+
+        <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-4 animate-fade-in-up">
+          <span className="gradient-text">Brain Blitz</span>
         </h1>
-        <p className="text-base text-zinc-500 dark:text-zinc-400 max-w-md leading-relaxed">
-          Free browser games that test your brain. No signup, no downloads.
-          Just play.
+        <p className="text-base sm:text-lg text-white/40 max-w-md animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+          Free browser games that test your brain.
+          <br />
+          No signup. No downloads. Just play.
         </p>
       </section>
 
       {/* Games grid */}
-      <section className="max-w-4xl mx-auto px-4 pb-24 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="relative z-10 max-w-3xl mx-auto px-4 pb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 stagger">
           {games.map((game) => (
-            <GameCard key={game.slug} game={game} borderClass={colorMap[game.color]} />
+            <GameCard key={game.slug} {...game} />
           ))}
         </div>
       </section>
@@ -94,39 +68,45 @@ export default function HomePage() {
 }
 
 function GameCard({
-  game,
-  borderClass,
-}: {
-  game: (typeof games)[0];
-  borderClass: string;
-}) {
-  const CardWrapper = game.available ? Link : "div";
+  slug, name, desc, emoji, color, available,
+}: (typeof games)[0]) {
+  const Card = available ? Link : "div";
 
   return (
-    <CardWrapper
-      href={game.available ? `/${game.slug}` : "#"}
-      className={`group relative flex flex-col gap-3 p-5 rounded-xl bg-white dark:bg-zinc-900 border transition-all duration-200 ${
-        game.available
-          ? `${borderClass} cursor-pointer hover:-translate-y-0.5 hover:shadow-lg`
-          : "border-zinc-100 dark:border-zinc-800 opacity-50 cursor-default"
+    <Card
+      href={available ? `/${slug}` : "#"}
+      className={`glass-card group relative flex items-start gap-4 p-5 ${
+        available ? "cursor-pointer" : "cursor-default opacity-40"
       }`}
     >
-      <div className="flex items-center gap-3">
-        <span className="text-2xl">{game.emoji}</span>
-        <div>
-          <h2 className="font-semibold text-sm text-zinc-900 dark:text-zinc-50">
-            {game.name}
-          </h2>
-          {!game.available && (
-            <span className="text-[10px] font-medium uppercase tracking-wider text-zinc-400">
-              Coming soon
+      {/* Accent glow on hover */}
+      {available && (
+        <div
+          className="absolute inset-0 rounded-[var(--radius-lg)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${color}15, transparent 70%)`,
+          }}
+        />
+      )}
+
+      <span className="relative z-10 text-2xl flex-shrink-0 mt-0.5">{emoji}</span>
+      <div className="relative z-10 min-w-0">
+        <div className="flex items-center gap-2">
+          <h2 className="font-semibold text-sm text-white/90">{name}</h2>
+          {!available && (
+            <span className="text-[10px] font-medium uppercase tracking-wider text-white/25">
+              Soon
             </span>
           )}
         </div>
+        <p className="text-xs text-white/35 mt-1 leading-relaxed">{desc}</p>
       </div>
-      <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-        {game.description}
-      </p>
-    </CardWrapper>
+
+      {available && (
+        <span className="relative z-10 ml-auto text-white/20 group-hover:text-white/50 group-hover:translate-x-0.5 transition-all duration-200 text-sm flex-shrink-0 mt-0.5">
+          →
+        </span>
+      )}
+    </Card>
   );
 }

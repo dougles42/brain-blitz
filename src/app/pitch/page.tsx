@@ -2,71 +2,65 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Pitch Perfect — Ear Training Game",
+  title: "Pitch Perfect",
   description:
     "Train your musical ear. Hear a note, then recreate it from memory. Solo practice, daily challenges, and multiplayer duels.",
 };
 
 export default function PitchPage() {
   return (
-    <main className="flex flex-col flex-1 items-center px-4 py-16">
-      <div className="text-center mb-12">
-        <span className="text-5xl mb-4 block">🎹</span>
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-2">
-          Pitch Perfect
+    <main className="relative flex-1 overflow-hidden flex flex-col items-center justify-center px-4 py-16">
+      {/* Ambient blobs */}
+      <div className="blob w-[500px] h-[500px] -top-20 -left-20" style={{ background: "rgba(124,58,237,0.1)" }} />
+      <div className="blob w-[400px] h-[400px] -bottom-20 -right-20" style={{ background: "rgba(59,130,246,0.06)" }} />
+
+      <div className="relative z-10 text-center mb-12 animate-fade-in-up">
+        <span className="text-6xl mb-5 block">🎹</span>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">
+          <span className="gradient-text">Pitch Perfect</span>
         </h1>
-        <p className="text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto leading-relaxed">
-          Hear a note, then recreate it from memory. How good is your musical
-          ear?
+        <p className="text-white/40 max-w-sm mx-auto leading-relaxed">
+          Hear a note, then recreate it from memory.
+          <br />
+          How good is your musical ear?
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-2xl stagger">
         <Link
           href="/pitch/solo"
-          className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-white dark:bg-zinc-900 border border-violet-200 dark:border-violet-800 hover:-translate-y-0.5 hover:shadow-lg hover:border-violet-400 dark:hover:border-violet-600 transition-all duration-200"
+          className="glass-card flex flex-col items-center gap-3 p-6 text-center group cursor-pointer"
         >
-          <span className="text-3xl">🎵</span>
-          <div className="text-center">
-            <h2 className="font-semibold text-zinc-900 dark:text-zinc-50">
-              Solo Practice
-            </h2>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-              5 rounds. Instant feedback. No pressure.
-            </p>
+          <span className="text-3xl group-hover:scale-110 transition-transform duration-300">🎵</span>
+          <div>
+            <h2 className="font-semibold text-sm text-white/90">Solo Practice</h2>
+            <p className="text-xs text-white/35 mt-1">5 rounds. Instant feedback.</p>
           </div>
         </Link>
 
         <Link
           href="/pitch/daily"
-          className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-white dark:bg-zinc-900 border border-indigo-200 dark:border-indigo-800 hover:-translate-y-0.5 hover:shadow-lg hover:border-indigo-400 dark:hover:border-indigo-600 transition-all duration-200 ring-2 ring-amber-400/30"
+          className="glass-card flex flex-col items-center gap-3 p-6 text-center group cursor-pointer relative overflow-hidden"
         >
-          <span className="absolute -top-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-amber-900">
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0" />
+          <span className="text-3xl group-hover:scale-110 transition-transform duration-300">📅</span>
+          <div>
+            <h2 className="font-semibold text-sm text-white/90">Daily Challenge</h2>
+            <p className="text-xs text-white/35 mt-1">Same note. One attempt.</p>
+          </div>
+          <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-amber-950">
             Daily
           </span>
-          <span className="text-3xl">📅</span>
-          <div className="text-center">
-            <h2 className="font-semibold text-zinc-900 dark:text-zinc-50">
-              Daily Challenge
-            </h2>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-              Same note for everyone. One attempt.
-            </p>
-          </div>
         </Link>
 
         <Link
           href="/pitch/multiplayer"
-          className="group flex flex-col items-center gap-3 p-6 rounded-xl bg-white dark:bg-zinc-900 border border-cyan-200 dark:border-cyan-800 hover:-translate-y-0.5 hover:shadow-lg hover:border-cyan-400 dark:hover:border-cyan-600 transition-all duration-200"
+          className="glass-card flex flex-col items-center gap-3 p-6 text-center group cursor-pointer"
         >
-          <span className="text-3xl">⚔️</span>
-          <div className="text-center">
-            <h2 className="font-semibold text-zinc-900 dark:text-zinc-50">
-              Duel Mode
-            </h2>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-              Challenge friends. Compare scores.
-            </p>
+          <span className="text-3xl group-hover:scale-110 transition-transform duration-300">⚔️</span>
+          <div>
+            <h2 className="font-semibold text-sm text-white/90">Duel Mode</h2>
+            <p className="text-xs text-white/35 mt-1">Challenge friends.</p>
           </div>
         </Link>
       </div>
